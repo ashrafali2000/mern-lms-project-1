@@ -1,2 +1,2 @@
-const BackendURL = "https://lmsbackend-020w.onrender.com"
+const BackendURL = "https://mern-lms-project-1-eypk.vercel.app/"
 export default BackendURL;
