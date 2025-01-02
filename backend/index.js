@@ -1,10 +1,10 @@
 //imports
-require("dotenv").config();
 const express = require("express");
 const app = express();
 const { connection } = require("./configs/db");
 const cors = require("cors");
 const mongoose = require("mongoose");
+require("dotenv").config();
 mongoose.set("strictQuery", false);
 
 //port
@@ -19,7 +19,7 @@ const contentRouter = require("./routes/Content.Route");
 const DoubtRouter = require("./routes/Doubt.Route");
 const DashboardRouter = require("./routes/Dashboard.Route");
 
-app.use(express.text());
+// app.use(express.text());
 app.use(express.json());
 app.use(cors());
 
