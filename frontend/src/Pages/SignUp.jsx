@@ -20,6 +20,7 @@ const SignUp = () => {
   //form state
   const [formData, setFormData] = useState({
     type: "",
+    name: "",
     email: "",
     password: "",
   });
@@ -134,12 +135,6 @@ const SignUp = () => {
 
   return (
  <div className="login">
-      <div>
-        <p>Please use this credentials.</p>
-        <p>Email : test@gmail.com</p>
-        <p>Password : test</p>
-      </div>
-      <br />
       <div className="loginContainer">
         <div className="loginImage">
           <img
@@ -161,6 +156,14 @@ const SignUp = () => {
                 <option value="tutor">Tutor</option>
                 <option value="student">Student</option>
               </select>
+               <input
+                required
+                name="name"
+                value={formData.id}
+                onChange={handleFormChange}
+                type="text"
+                placeholder="Enter Name"
+              />
               <input
                 required
                 name="email"
