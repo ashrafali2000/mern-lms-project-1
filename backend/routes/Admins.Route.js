@@ -23,7 +23,7 @@ router.get("/all", async (req, res) => {
 });
 
 //admin registration route
-router.post("/register", isAdminAuthenticated, async (req, res) => {
+router.post("/signup", isAdminAuthenticated, async (req, res) => {
   const { name, email, password } = req.body.data;
   try {
     let user = await AdminModel.find({ email });
