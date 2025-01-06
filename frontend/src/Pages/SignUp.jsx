@@ -1,4 +1,140 @@
-<section class="bg-gray-50 dark:bg-gray-900">
+import React, { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { adminLogin, studentLogin, tutorLogin } from "../../Redux/auth/action";
+
+//css imports
+import { message, Space, Spin } from "antd";
+import "./Login.css";
+
+const SignUp = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const auth = useSelector((store) => store.auth);
+
+  //alert api
+  const [messageApi, contextHolder] = message.useMessage();
+
+  //loading state
+  const [loading, setLoading] = useState(false);
+
+  //form state
+  const [formData, setFormData] = useState({
+    type: "",
+    email: "",
+    password: "",
+  });
+
+  const handleFormChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // login function
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    if (formData.type === "") {
+      return messageApi.open({
+        type: "error",
+        content: "Please select user type.",
+        duration: 3,
+      });
+    }
+    setLoading(true);
+    if (formData.type === "admin") {
+      dispatch(adminLogin(formData)).then((res) => {
+        if (res.message === "Wrong credentials") {
+          setLoading(false);
+          messageApi.open({
+            type: "info",
+            content: "Wrong credentials !",
+            duration: 3,
+          });
+        } else if (res.message === "Access Denied") {
+          setLoading(false);
+          messageApi.open({
+            type: "info",
+            content: "Your access has been revoked by the admin !",
+            duration: 3,
+          });
+        } else if (res.message === "Error") {
+          setLoading(false);
+          messageApi.open({
+            type: "info",
+            content: "Something went wrong, please try again",
+            duration: 3,
+          });
+        } else {
+          setLoading(false);
+          return navigate("/home");
+        }
+      });
+    }
+    if (formData.type === "tutor") {
+      dispatch(tutorLogin(formData)).then((res) => {
+        if (res.message === "Wrong credentials") {
+          setLoading(false);
+          messageApi.open({
+            type: "info",
+            content: "Wrong credentials !",
+            duration: 3,
+          });
+        } else if (res.message === "Access Denied") {
+          setLoading(false);
+          messageApi.open({
+            type: "info",
+            content: "Your access has been revoked by the admin !",
+            duration: 3,
+          });
+        } else if (res.message === "error") {
+          setLoading(false);
+          messageApi.open({
+            type: "info",
+            content: "Something went wrong, please try again",
+            duration: 3,
+          });
+        } else {
+          setLoading(false);
+          return navigate("/home");
+        }
+      });
+    }
+    if (formData.type === "student") {
+      dispatch(studentLogin(formData)).then((res) => {
+        if (res.message === "Wrong credentials") {
+          setLoading(false);
+          messageApi.open({
+            type: "info",
+            content: "Wrong credentials !",
+            duration: 3,
+          });
+        } else if (res.message === "Access Denied") {
+          setLoading(false);
+          messageApi.open({
+            type: "info",
+            content: "Your access has been revoked by the admin !",
+            duration: 3,
+          });
+        } else if (res.message === "error") {
+          setLoading(false);
+          messageApi.open({
+            type: "info",
+            content: "Something went wrong, please try again",
+            duration: 3,
+          });
+        } else {
+          setLoading(false);
+          return navigate("/home");
+        }
+      });
+    }
+  };
+
+  if (auth.data.isAuthenticated) {
+    return <Navigate to="/home" />;
+  }
+
+  return (
+   <section class="bg-gray-50 dark:bg-gray-900">
   <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
       <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
           <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo">
@@ -39,3 +175,8 @@
       </div>
   </div>
 </section>
+
+  );
+};
+
+export default SignUp;
