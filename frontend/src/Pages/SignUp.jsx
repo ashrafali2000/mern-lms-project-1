@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { adminRegister} from "../Redux/admin/action";
 import { studentRegister } from "../Redux/student/action";
+import { tutorRegister  } from "../Redux/tutor/action";
 
 //css imports
 import { message, Space, Spin } from "antd";
@@ -71,7 +72,7 @@ const SignUp = () => {
       });
     }
     if (formData.type === "tutor") {
-      dispatch(tutorSignUp(formData)).then((res) => {
+      dispatch(tutorRegister(formData)).then((res) => {
         if (res.message === "Wrong credentials") {
           setLoading(false);
           messageApi.open({
@@ -100,7 +101,7 @@ const SignUp = () => {
       });
     }
     if (formData.type === "student") {
-      dispatch(studentSignUp(formData)).then((res) => {
+      dispatch(studentRegister(formData)).then((res) => {
         if (res.message === "Wrong credentials") {
           setLoading(false);
           messageApi.open({
