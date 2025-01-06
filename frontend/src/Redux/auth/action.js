@@ -80,7 +80,7 @@ export const studentLogin = (data) => async (dispatch) => {
 //signUp admin
 export const adminSignUp = (data) => async (dispatch) => {
   try {
-    dispatch({ type: types.LOGIN_ADMIN_REQUEST });
+    dispatch({ type: types.SIGNUP_ADMIN_REQUEST });
     const res = await axios.post(`${url}/admin/signup`, data);
     dispatch({
       type: types.SIGNUP_ADMIN_SUCCESS,
@@ -105,7 +105,7 @@ export const adminSignUp = (data) => async (dispatch) => {
 //signUp tutor
 export const tutorSignUp = (data) => async (dispatch) => {
   try {
-    dispatch({ type: types.LOGIN_TUTOR_REQUEST });
+    dispatch({ type: types.SIGNUP_TUTOR_REQUEST });
     const res = await axios.post(`${url}/tutor/signup`, data);
     dispatch({
       type: types.SIGNUP_TUTOR_SUCCESS,
@@ -129,7 +129,7 @@ export const tutorSignUp = (data) => async (dispatch) => {
 //signUp student
 export const studentSignUp = (data) => async (dispatch) => {
   try {
-    dispatch({ type: types.LOGIN_STUDENT_REQUEST });
+    dispatch({ type: types.SIGNUP_STUDENT_REQUEST });
     const res = await axios.post(`${url}/student/signup`, data);
     dispatch({
       type: types.SIGNUP_STUDENT_SUCCESS,
