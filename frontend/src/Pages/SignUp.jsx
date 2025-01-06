@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { adminRegister} from "../Redux/admin/action";
+import { studentRegister } from "../Redux/student/action";
 
 //css imports
 import { message, Space, Spin } from "antd";
