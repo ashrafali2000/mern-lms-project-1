@@ -54,7 +54,7 @@ router.post("/register", async (req, res) => {
           });
 
           const mailOptions = {
-            from: "agrawaljoy1@gmail.com",
+            from: "ali4282271@gmail.com",
             to: email,
             subject: "Account ID and Password",
             text: `Welcome to LMS, Congratulations,Your account has been created successfully.This is your User type : Admin and Password : ${password}  `,
