@@ -21,7 +21,7 @@ router.get("/all", async (req, res) => {
 });
 
 //register new tutor
-router.post("/signup", isAdminAuthenticated, async (req, res) => {
+router.post("/register", isAdminAuthenticated, async (req, res) => {
   const { name, email, password, subject } = req.body.data;
   try {
     let user = await TutorModel.find({ email });
