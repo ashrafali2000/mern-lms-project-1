@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { adminLogin, studentLogin, tutorLogin } from "../../Redux/auth/action";
+import { adminLogin, studentLogin, tutorLogin } from "../Redux/auth/action";
 
 //css imports
 import { message, Space, Spin } from "antd";
