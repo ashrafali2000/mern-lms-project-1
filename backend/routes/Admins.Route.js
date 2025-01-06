@@ -48,8 +48,8 @@ router.post("/register", async (req, res) => {
           const transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
-              user: "agrawaljoy1@gmail.com",
-              pass: "nsziioprjzwcodlm",
+              user: "ali4282271@gmail.com",
+              pass: "vuzy kaaz xmeg fdhy",
             },
           });
 
