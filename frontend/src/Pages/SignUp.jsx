@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { adminSignUp,tutorSignUp, studentSignUp} from "../Redux/auth/action";
+import { adminRegister} from "../Redux/admin/action";
 
 //css imports
 import { message, Space, Spin } from "antd";
@@ -41,7 +41,7 @@ const SignUp = () => {
     }
     setLoading(true);
     if (formData.type === "admin") {
-      dispatch(adminSignUp(formData)).then((res) => {
+      dispatch(adminRegister(formData)).then((res) => {
         if (res.message === "Wrong credentials") {
           setLoading(false);
           messageApi.open({
