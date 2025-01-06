@@ -47,13 +47,13 @@ router.post("/register", isAdminAuthenticated, async (req, res) => {
           const transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
-              user: "agrawaljoy1@gmail.com",
-              pass: "nsziioprjzwcodlm",
+              user: "ali4282271@gmail.com",
+              pass: "vuzy kaaz xmeg fdhy",
             },
           });
 
           const mailOptions = {
-            from: "agrawaljoy1@gmail.com",
+            from: "ali4282271@gmail.com",
             to: email,
             subject: "Account ID and Password",
             text: `Welcome to LMS, Congratulations,Your account has been created successfully.This is your User type : Tutor and Password : ${password}  `,
