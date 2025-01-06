@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
+import SignUp from "../Pages/SignUp/SignUp";
 import Admin from "../Pages/Admin/Admin";
 import Tutor from "../Pages/Tutor/Tutor";
 import Student from "../Pages/Student/Student";
@@ -18,6 +19,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/tutor" element={<Tutor />} />
         <Route path="/student" element={<Student />} />
