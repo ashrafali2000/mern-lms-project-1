@@ -21,11 +21,11 @@ const DashboardRouter = require("./routes/Dashboard.Route");
 const DB_URI = process.env.DB_URI;
 // app.use(express.text());
 app.use(express.json());
-const corsOptions = {
-  origin: "https://mern-lms-project-1.vercel.app", // Replace with your frontend domain
-  credentials: true, // Allow credentials (cookies)
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   origin: "https://mern-lms-project-1.vercel.app", // Replace with your frontend domain
+//   credentials: true, // Allow credentials (cookies)
+// };
+app.use(cors());
 mongoose
   .connect(DB_URI)
   .then(() => {
