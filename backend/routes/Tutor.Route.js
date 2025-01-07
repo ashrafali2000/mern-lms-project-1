@@ -87,9 +87,7 @@ router.post("/register", isAdminAuthenticated, async (req, res) => {
     if (user.length > 0) {
       return res.send({ msg: "User already registered" });
     }
-  let hashPassword =  bcrypt.hash(
-      password,
-      +process.env.Salt_rounds)
+  let hashPassword =  bcrypt.hash(password, +process.env.Salt_rounds);
           const tutor = new TutorModel({
             name,
             email,
@@ -125,7 +123,6 @@ router.post("/register", isAdminAuthenticated, async (req, res) => {
             msg: "Tutor Registered Successfully",
             tutor: newTutor[0],
           });
-        }
   } catch (err) {
     res.status(404).send({ msg: "Tutor Registration failed" });
   }
