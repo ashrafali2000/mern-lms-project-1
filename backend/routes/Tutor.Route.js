@@ -20,6 +20,65 @@ router.get("/all", async (req, res) => {
   }
 });
 
+// //register new tutor
+// router.post("/register", isAdminAuthenticated, async (req, res) => {
+//   const { name, email, password, subject } = req.body.data;
+//   try {
+//     let user = await TutorModel.find({ email });
+//     if (user.length > 0) {
+//       return res.send({ msg: "User already registered" });
+//     }
+//     bcrypt.hash(
+//       password,
+//       +process.env.Salt_rounds,
+//       async (err, secure_password) => {
+//         if (err) {
+//           console.log(err);
+//         } else {
+//           const tutor = new TutorModel({
+//             name,
+//             email,
+//             subject,
+//             password: secure_password,
+//           });
+//           await tutor.save();
+//           let newTutor = await TutorModel.find({ email });
+//           let myPassword = process.env.PASS;
+//           const transporter = nodemailer.createTransport({
+//             service: "gmail",
+//             auth: {
+//               user: "ali4282271@gmail.com",
+//               pass: myPassword,
+//             },
+//           });
+
+//           const mailOptions = {
+//             from: "ali4282271@gmail.com",
+//             to: email,
+//             subject: "Account ID and Password",
+//             text: `Welcome to LMS, Congratulations,Your account has been created successfully.This is your User type : Tutor and Password : ${password}  `,
+//           };
+
+//           transporter.sendMail(mailOptions, (error, info) => {
+//             if (error) {
+//               return res.send({ msg: "error" });
+//             }
+//             res.send({ msg: "Password sent" });
+//           });
+
+//           res.send({
+//             msg: "Tutor Registered Successfully",
+//             tutor: newTutor[0],
+//           });
+//         }
+//       }
+//     );
+//   } catch (err) {
+//     res.status(404).send({ msg: "Tutor Registration failed" });
+//   }
+// });
+
+
 //register new tutor
 router.post("/register", isAdminAuthenticated, async (req, res) => {
   const { name, email, password, subject } = req.body.data;
@@ -28,56 +87,49 @@ router.post("/register", isAdminAuthenticated, async (req, res) => {
     if (user.length > 0) {
       return res.send({ msg: "User already registered" });
     }
-    bcrypt.hash(
+  let hashPassword =  bcrypt.hash(
       password,
-      +process.env.Salt_rounds,
-      async (err, secure_password) => {
-        if (err) {
-          console.log(err);
-        } else {
+      +process.env.Salt_rounds)
           const tutor = new TutorModel({
             name,
             email,
             subject,
-            password: secure_password,
+            password: hashPassword,
           });
           await tutor.save();
           let newTutor = await TutorModel.find({ email });
-          let myPassword = process.env.PASS;
-          const transporter = nodemailer.createTransport({
-            service: "gmail",
-            auth: {
-              user: "ali4282271@gmail.com",
-              pass: myPassword,
-            },
-          });
+          // let myPassword = process.env.PASS;
+          // const transporter = nodemailer.createTransport({
+          //   service: "gmail",
+          //   auth: {
+          //     user: "ali4282271@gmail.com",
+          //     pass: myPassword,
+          //   },
+          // });
 
-          const mailOptions = {
-            from: "ali4282271@gmail.com",
-            to: email,
-            subject: "Account ID and Password",
-            text: `Welcome to LMS, Congratulations,Your account has been created successfully.This is your User type : Tutor and Password : ${password}  `,
-          };
+          // const mailOptions = {
+          //   from: "ali4282271@gmail.com",
+          //   to: email,
+          //   subject: "Account ID and Password",
+          //   text: `Welcome to LMS, Congratulations,Your account has been created successfully.This is your User type : Tutor and Password : ${password}  `,
+          // };
 
-          transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-              return res.send({ msg: "error" });
-            }
-            res.send({ msg: "Password sent" });
-          });
+          // transporter.sendMail(mailOptions, (error, info) => {
+          //   if (error) {
+          //     return res.send({ msg: "error" });
+          //   }
+          //   res.send({ msg: "Password sent" });
+          // });
 
           res.send({
             msg: "Tutor Registered Successfully",
             tutor: newTutor[0],
           });
         }
-      }
-    );
   } catch (err) {
     res.status(404).send({ msg: "Tutor Registration failed" });
   }
 });
-
 //tutor login
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
