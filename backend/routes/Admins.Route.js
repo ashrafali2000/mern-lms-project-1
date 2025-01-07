@@ -94,28 +94,28 @@ router.post("/register", async (req, res) => {
           });
           await admin.save();
           let newAdmin = await AdminModel.find({ email });
-          let myPassword = process.env.PASS;
-          const transporter = nodemailer.createTransport({
-            service: "gmail",
-            auth: {
-              user: "ali4282271@gmail.com",
-              pass: myPassword,
-            },
-          });
+          // let myPassword = process.env.PASS;
+          // const transporter = nodemailer.createTransport({
+          //   service: "gmail",
+          //   auth: {
+          //     user: "ali4282271@gmail.com",
+          //     pass: myPassword,
+          //   },
+          // });
 
-          const mailOptions = {
-            from: "ali4282271@gmail.com",
-            to: email,
-            subject: "Account ID and Password",
-            text: `Welcome to LMS, Congratulations,Your account has been created successfully.This is your User type : Admin and Password : ${password}  `,
-          };
+          // const mailOptions = {
+          //   from: "ali4282271@gmail.com",
+          //   to: email,
+          //   subject: "Account ID and Password",
+          //   text: `Welcome to LMS, Congratulations,Your account has been created successfully.This is your User type : Admin and Password : ${password}  `,
+          // };
 
-          transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-              return res.send({ msg: "error" });
-            }
-            res.send({ msg: "Password sent" });
-          });
+          // transporter.sendMail(mailOptions, (error, info) => {
+          //   if (error) {
+          //     return res.send({ msg: "error" });
+          //   }
+          //   res.send({ msg: "Password sent" });
+          // });
 
           res.send({
             msg: "Admin Registered Successfully",
