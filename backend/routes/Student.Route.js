@@ -21,6 +21,65 @@ router.get("/all", async (req, res) => {
 });
 
 // register new students
+// router.post("/register", isAuthenticated, async (req, res) => {
+//   const { name, email, password } = req.body.data;
+//   try {
+//     let user = await StudentModel.find({ email });
+//     if (user.length > 0) {
+//       return res.send({ msg: "User already registered" });
+//     }
+//     bcrypt.hash(
+//       password,
+//       +process.env.Salt_rounds,
+//       async (err, secure_password) => {
+//         if (err) {
+//           console.log(err);
+//         } else {
+//           const student = new StudentModel({
+//             name,
+//             email,
+//             class: req.body.data.class,
+//             password: secure_password,
+//           });
+//           await student.save();
+//           let newStudent = await StudentModel.find({ email });
+//             let myPassword = process.env.PASS;
+
+//           const transporter = nodemailer.createTransport({
+//             service: "gmail",
+//             auth: {
+//               user: "ali4282271@gmail.com",
+//               pass: myPassword,
+//             },
+//           });
+
+//           const mailOptions = {
+//             from: "ali4282271@gmail.com",
+//             to: email,
+//             subject: "Account ID and Password",
+//             text: `Welcome to LMS, Congratulations,Your account has been created successfully.This is your User type : Student and Password : ${password}  `,
+//           };
+
+//           transporter.sendMail(mailOptions, (error, info) => {
+//             if (error) {
+//               return res.send({ msg: "error" });
+//             }
+//             res.send({ msg: "Password sent" });
+//           });
+
+//           res.send({
+//             msg: "Student Registered Successfully",
+//             student: newStudent[0],
+//           });
+//         }
+//       }
+//     );
+//   } catch (err) {
+//     res.status(404).send({ msg: "Student Registration failed" });
+//   }
+// });
+
+// register new students
 router.post("/register", isAuthenticated, async (req, res) => {
   const { name, email, password } = req.body.data;
   try {
@@ -28,52 +87,44 @@ router.post("/register", isAuthenticated, async (req, res) => {
     if (user.length > 0) {
       return res.send({ msg: "User already registered" });
     }
-    bcrypt.hash(
-      password,
-      +process.env.Salt_rounds,
-      async (err, secure_password) => {
-        if (err) {
-          console.log(err);
-        } else {
+   let hashPassword = bcrypt.hash( password, +process.env.Salt_rounds)
           const student = new StudentModel({
             name,
             email,
             class: req.body.data.class,
-            password: secure_password,
+            password: hashPassword,
           });
           await student.save();
           let newStudent = await StudentModel.find({ email });
-            let myPassword = process.env.PASS;
+            // let myPassword = process.env.PASS;
 
-          const transporter = nodemailer.createTransport({
-            service: "gmail",
-            auth: {
-              user: "ali4282271@gmail.com",
-              pass: myPassword,
-            },
-          });
+          // const transporter = nodemailer.createTransport({
+          //   service: "gmail",
+          //   auth: {
+          //     user: "ali4282271@gmail.com",
+          //     pass: myPassword,
+          //   },
+          // });
 
-          const mailOptions = {
-            from: "ali4282271@gmail.com",
-            to: email,
-            subject: "Account ID and Password",
-            text: `Welcome to LMS, Congratulations,Your account has been created successfully.This is your User type : Student and Password : ${password}  `,
-          };
+          // const mailOptions = {
+          //   from: "ali4282271@gmail.com",
+          //   to: email,
+          //   subject: "Account ID and Password",
+          //   text: `Welcome to LMS, Congratulations,Your account has been created successfully.This is your User type : Student and Password : ${password}  `,
+          // };
 
-          transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-              return res.send({ msg: "error" });
-            }
-            res.send({ msg: "Password sent" });
-          });
+          // transporter.sendMail(mailOptions, (error, info) => {
+          //   if (error) {
+          //     return res.send({ msg: "error" });
+          //   }
+          //   res.send({ msg: "Password sent" });
+          // });
 
           res.send({
             msg: "Student Registered Successfully",
             student: newStudent[0],
           });
         }
-      }
-    );
   } catch (err) {
     res.status(404).send({ msg: "Student Registration failed" });
   }
