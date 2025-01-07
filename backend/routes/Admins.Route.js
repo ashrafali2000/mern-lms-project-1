@@ -121,7 +121,6 @@ router.post("/register", async (req, res) => {
             msg: "Admin Registered Successfully",
             admin: newAdmin[0],
           });
-        }
       }
   } catch (err) {
     res.status(404).send({ msg: "Admin Registration failed" });
