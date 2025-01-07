@@ -43,12 +43,12 @@ router.post("/register", isAdminAuthenticated, async (req, res) => {
           });
           await tutor.save();
           let newTutor = await TutorModel.find({ email });
-
+          let myPassword = process.env.PASS;
           const transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
               user: "ali4282271@gmail.com",
-              pass: "vuzy kaaz xmeg fdhy",
+              pass: myPassword,
             },
           });
 
