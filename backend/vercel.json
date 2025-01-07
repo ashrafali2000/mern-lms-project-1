@@ -13,12 +13,8 @@
     }
   ]
   "github": {
-    "autoJobCancelation": false
-  },
-   "github": {
-    "silent": true
-  },
-  "github": {
+    "autoJobCancelation": false,
+    "silent": true,
     "enabled": false
   }
 }
