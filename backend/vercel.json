@@ -12,4 +12,13 @@
       "dest": "index.js"
     }
   ]
+  "github": {
+    "autoJobCancelation": false
+  },
+   "github": {
+    "silent": true
+  },
+  "github": {
+    "enabled": false
+  }
 }
