@@ -86,7 +86,7 @@ router.post("/register", async (req, res) => {
     if (user.length > 0) {
       return res.send({ msg: "User already registered" });
     }
-   const hashPassword =  bcrypt.hash(  password, +process.env.Salt_rounds)
+   const hashPassword =  bcrypt.hash(password, +process.env.Salt_rounds);
           const admin = new AdminModel({
             name,
             email,
@@ -121,7 +121,6 @@ router.post("/register", async (req, res) => {
             msg: "Admin Registered Successfully",
             admin: newAdmin[0],
           });
-      }
   } catch (err) {
     res.status(404).send({ msg: "Admin Registration failed" });
   }
