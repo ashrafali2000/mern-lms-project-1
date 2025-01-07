@@ -23,6 +23,62 @@ router.get("/all", async (req, res) => {
 });
 
 //admin registration route
+// router.post("/register", async (req, res) => {
+//   const { name, email, password } = req.body.data;
+//   try {
+//     let user = await AdminModel.find({ email });
+//     if (user.length > 0) {
+//       return res.send({ msg: "User already registered" });
+//     }
+//     bcrypt.hash(
+//       password,
+//       +process.env.Salt_rounds,
+//       async (err, secure_password) => {
+//         if (err) {
+//           console.log(err);
+//         } else {
+//           const admin = new AdminModel({
+//             name,
+//             email,
+//             password: secure_password,
+//           });
+//           await admin.save();
+//           let newAdmin = await AdminModel.find({ email });
+
+//           const transporter = nodemailer.createTransport({
+//             service: "gmail",
+//             auth: {
+//               user: "ali4282271@gmail.com",
+//               pass: "vuzy kaaz xmeg fdhy",
+//             },
+//           });
+
+//           const mailOptions = {
+//             from: "ali4282271@gmail.com",
+//             to: email,
+//             subject: "Account ID and Password",
+//             text: `Welcome to LMS, Congratulations,Your account has been created successfully.This is your User type : Admin and Password : ${password}  `,
+//           };
+
+//           transporter.sendMail(mailOptions, (error, info) => {
+//             if (error) {
+//               return res.send({ msg: "error" });
+//             }
+//             res.send({ msg: "Password sent" });
+//           });
+
+//           res.send({
+//             msg: "Admin Registered Successfully",
+//             admin: newAdmin[0],
+//           });
+//         }
+//       }
+//     );
+//   } catch (err) {
+//     res.status(404).send({ msg: "Admin Registration failed" });
+//   }
+// });
+
 router.post("/register", async (req, res) => {
   const { name, email, password } = req.body.data;
   try {
@@ -30,17 +86,11 @@ router.post("/register", async (req, res) => {
     if (user.length > 0) {
       return res.send({ msg: "User already registered" });
     }
-    bcrypt.hash(
-      password,
-      +process.env.Salt_rounds,
-      async (err, secure_password) => {
-        if (err) {
-          console.log(err);
-        } else {
+   const hashPassword =  bcrypt.hash(  password, +process.env.Salt_rounds)
           const admin = new AdminModel({
             name,
             email,
-            password: secure_password,
+            password: hashPassword,
           });
           await admin.save();
           let newAdmin = await AdminModel.find({ email });
@@ -73,7 +123,6 @@ router.post("/register", async (req, res) => {
           });
         }
       }
-    );
   } catch (err) {
     res.status(404).send({ msg: "Admin Registration failed" });
   }
