@@ -124,7 +124,6 @@ router.post("/register", isAuthenticated, async (req, res) => {
             msg: "Student Registered Successfully",
             student: newStudent[0],
           });
-        }
   } catch (err) {
     res.status(404).send({ msg: "Student Registration failed" });
   }
